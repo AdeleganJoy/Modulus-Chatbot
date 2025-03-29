@@ -1,0 +1,33 @@
+
+name: Deploy Modulus Bot
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2 
+
+    - name: Set up Python # Setting up python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8' 
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # Install Python libaries
+
+    - name: Download Rasa model from Dropbox
+      run: |
+        python download_model.py  # Runs script to download rasa model
+
+    - name: Start Rasa
+      run: |
+        rasa run --enable-api --cors "*" #start running rasa
+        rasa run actions &  # Run actions in the background
