@@ -1,0 +1,15 @@
+# Ignore virtual environment
+venv/
+
+# Ignore Rasa model files
+*.tar.gz
+*.h5
+*.sqlite
+
+# Ignore logs and data
+logs/
+data/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
