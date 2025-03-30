@@ -29,5 +29,4 @@ jobs:
 
     - name: Start Rasa
       run: |
-        nohup rasa run --enable-api --cors "*" &  # Start running Rasa API in the background
         nohup rasa run actions &  # Run actions in the background
