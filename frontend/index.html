@@ -84,7 +84,7 @@ function sendMessage() {
     document.getElementById('user-input').value = '';
 
     // Send the message to Rasa via POST request
-    fetch('http://localhost:5005/webhooks/rest/webhook', {
+    fetch('https://your-rasa-app.onrender.com/webhooks/rest/webhook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "sender": "user", "message": userMessage })
