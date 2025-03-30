@@ -1,10 +1,9 @@
-
 name: Deploy Modulus Bot
 
 on:
   push:
     branches:
-      - main 
+      - main  # Runs on push to the main branch
 
 jobs:
   build:
@@ -12,21 +11,29 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2 
+      uses: actions/checkout@v2
 
-    - name: Set up Python # Setting up python
+    - name: Set up Python # Setting up Python environment
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8' 
+        python-version: '3.8'
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt  # Install Python libaries
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-    - name: Download Rasa model from Dropbox
+    - name: Download Rasa model from Dropbox (if needed)
       run: |
-        python download_model.py  # Runs script to download rasa model
+        python download_model.py  # Run script to download Rasa model if applicable
 
-    - name: Start Rasa
+    - name: Run Rasa Actions in Background
       run: |
-        nohup rasa run actions &  # Run actions in the background
+        nohup rasa run actions &  # Run Rasa actions in the background (nohup keeps it running)
+
+    - name: Navigate to frontend folder
+      run: |
+        cd frontend  # Navigate to the frontend folder
+
+    - name: Start Frontend Server
+      run: |
+        python -m http.server 8000  # Start serving frontend files (static files)
