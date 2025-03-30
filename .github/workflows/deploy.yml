@@ -36,4 +36,4 @@ jobs:
 
     - name: Start Frontend Server
       run: |
-        python -m http.server 8000  # Start serving frontend files (static files)
+        python -m http.server $PORT --bind 0.0.0.0
